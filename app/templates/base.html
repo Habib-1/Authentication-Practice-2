@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>Authentication & Authorization HomeWork</title> 
+        <!-- Required meta tags -->
+        <meta charset="utf-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, shrink-to-fit=no"
+        />
+
+        <!-- Bootstrap CSS v5.2.1 -->
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+            crossorigin="anonymous"
+        />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-bootstrap/0.5pre/assets/css/bootstrap.min.css" integrity="sha512-UVQYZVYu7WhHEaO2xGEmc4/3F8ctnXt4jwfGl2MCIHKc95RMgYS8yfNJ3j6wUe0UGiTK0S3vcmh3Ml9h278x5w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    </head>
+
+    <body>
+        <header>
+            <ul class="nav justify-content-center align-items-center  bg-success">
+                <li class="nav-item me-2 p-2">
+                  <a class="nav-link  btn btn-outline-primary " aria-current="page" href="{% url 'home' %}">Home</a>
+                </li>
+                
+                 {% if request.user.is_authenticated %}
+                     <li class="nav-item me-2 p-2">
+                        <a class="nav-link text-light btn btn-primary " href="{% url 'profile' %}">Profile</a>
+                    </li>
+                    <li class="nav-item me-2 p-2">
+                        <a class="nav-link text-light btn btn-danger focus-ring-info " href="{% url 'logout' %}">Logout</a>
+                    </li> 
+                 {% else %} 
+                    <li class="nav-item me-2 p-2 ">
+                        <a class="nav-link btn btn-primary text-light" href="{% url 'login' %}">Login</a>
+                    </li>
+                    <li class="nav-item me-2 p-2">
+                        <a class="nav-link btn btn-info text-light" href="{% url 'register' %}">Register</a>
+                    </li>
+                {% endif %} 
+                    
+                
+                
+              </ul>
+        </header>
+        <main>
+            
+            {% if messages %}
+            
+            {% for msg in messages %}
+            <div class="alert alert-{{msg.tags}}">
+                <strong>{{msg}}</strong>
+            </div>
+            <script>
+                setTimeout (()=>{
+                    $(".alert").alert("close");
+                },3000) 
+                
+            </script>
+            {% endfor %}
+                
+                
+            {% endif %}
+                
+            {% block content %}
+            
+            {% endblock content %}
+
+
+
+        </main>
+        <footer>
+            <!-- place footer here -->
+        </footer>
+        <!-- Bootstrap JavaScript Libraries -->
+        <script
+            src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+            integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+            crossorigin="anonymous"
+        ></script>
+
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+            integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+            crossorigin="anonymous"
+        ></script>
+    </body>
+</html>
